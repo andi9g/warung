@@ -66,8 +66,9 @@
         @endphp
         @foreach ($data as $item)
             @php
-                $keluar = DB::table("penjualan")->selectRaw("sum(jumlah) as total")->first()->total;
-                $jml = $item->total - $keluar;
+                // $keluar = DB::table("penjualan")->selectRaw("sum(jumlah) as total")->first()->total;
+                
+                $jml = $item->total;
             @endphp
 
             <tr>

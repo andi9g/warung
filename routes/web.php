@@ -37,16 +37,16 @@ Route::middleware(['auth'])->group(function () {
     Route::get("barangmasuk/cetak", "laporanC@cetakmasuk")->name("cetak.masuk");
     Route::get("barangkeluar", "laporanC@barangkeluar");
     Route::get("barangkeluar/cetak", "laporanC@cetakkeluar")->name("cetak.keluar");
+
+    Route::get("profil", "HomeController@profil");
+    Route::post("profil", "HomeController@ubah")->name("ubah.password");
 });
 
-Route::get('/', function(){
-    return view('layouts.admin');
-});
 
 // Route::get('pdf', 'startController@pdf');
 
-Route::get('siswa/export/', 'startController@export');
+// Route::get('siswa/export/', 'startController@export');
 
 
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
