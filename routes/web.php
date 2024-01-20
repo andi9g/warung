@@ -31,6 +31,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('barangkeluar', 'pembelianC@barangkeluar')->name('barang.keluar');
     
     Route::resource('penjualan', 'penjualanC');
+    Route::resource('supplier', 'supplierC');
 
     //laporan
     Route::get("barangmasuk", "laporanC@barangmasuk");

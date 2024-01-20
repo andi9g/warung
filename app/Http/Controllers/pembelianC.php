@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\pembelianM;
 use App\Models\databarangM;
+use App\Models\supplierM;
 use App\Models\penjualanM;
 use Illuminate\Http\Request;
 
@@ -19,6 +20,8 @@ class pembelianC extends Controller
 
         $keyword = empty($request->keyword)?'':$request->keyword;
 
+        $supplier = supplierM::get();
+
         $data = databarangM::from('databarang as b')
         ->join('pembelian as p', 'p.iddatabarang', 'b.iddatabarang')
         ->select("b.iddatabarang", "b.namabarang", "b.harga")
@@ -33,6 +36,7 @@ class pembelianC extends Controller
         return view("pages.transaksi.pembelian", [
             "keyword" => $keyword,
             "data" => $data,
+            "supplier" => $supplier,
         ]);
     }
 

@@ -54,11 +54,12 @@
     <table border="1">
         <tr>
             <th>No</th>
-            <th>Tanggal Masuk</th>
+            <th>Tgl Masuk</th>
             <th>Nama Barang</th>
             <th>Jumlah</th>
             <th>Harga</th>
             <th>Total Harga</th>
+            <th>Supplier</th>
         </tr>
 
         @php
@@ -73,7 +74,7 @@
 
             <tr>
                 <td>{{ $loop->iteration }}</td>
-                <td>{{ \Carbon\Carbon::parse($item->tanggalmasuk)->isoFormat("DD MMMM Y") }}</td>
+                <td>{{ \Carbon\Carbon::parse($item->tanggalmasuk)->isoFormat("DD MMM Y") }}</td>
                 <td>
                     {{ $item->namabarang }}
                 </td>
@@ -89,12 +90,28 @@
                         $totalkeseluruhan = $totalkeseluruhan + ($jml * $item->harga);
                     @endphp
                 </td>
+                <td align="left" valign="top">
+                    @php
+                        $supplier = App\Models\pembelianM::from("pembelian as p")
+                        ->join("databarang as b", "b.iddatabarang", "p.iddatabarang")
+                        ->join("supplier as s", "s.idsupplier", "p.idsupplier")
+                        ->where("b.namabarang", $item->namabarang)
+                        ->select("s.namasupplier")
+                        ->groupBy("s.namasupplier")
+                        ->get();
+                    @endphp
+                    <ol style="margin: 0;">
+                        @foreach ($supplier as $sup)
+                            <li>{{ $sup->namasupplier }}</li>
+                        @endforeach
+                    </ol>
+                </td>
             </tr>
         @endforeach
 
         <tr>
             <th colspan="5">Total Harga Keseluruhan</th>
-            <th>Rp{{ number_format($totalkeseluruhan, 0, ",", ".") }}</th>
+            <th colspan="2">Rp{{ number_format($totalkeseluruhan, 0, ",", ".") }}</th>
         </tr>
     </table>
 

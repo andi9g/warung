@@ -30,12 +30,22 @@
     
                     <div class="form-group">
                         <label for="jumlah">Jumlah</label>
-                        <input id="jumlah" class="form-control" value="{{ date('Y-m-d') }}" type="number" name="jumlah">
+                        <input id="jumlah" value="1" class="form-control" value="{{ date('Y-m-d') }}" type="number" name="jumlah">
                     </div>
     
                     <div class="form-group">
                         <label for="harga">Harga</label>
-                        <input id="harga" class="form-control" value="{{ date('Y-m-d') }}" type="number" name="harga">
+                        <input id="harga" value="1" class="form-control" value="{{ date('Y-m-d') }}" type="number" name="harga">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="idsupplier">Supplier</label>
+                        <select id="idsupplier" class="form-control" name="idsupplier">
+                            @foreach ($supplier as $s)
+                            <option value="{{ $s->idsupplier }}">{{ $s->namasupplier }}</option>
+                                
+                            @endforeach
+                        </select>
                     </div>
     
     
@@ -48,10 +58,44 @@
     </div>
 </div>
 
+
+<div id="tambahsupplier" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="my-modal-title">Tambah Supplier</h5>
+                <button class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{{ route('supplier.store', []) }}" method="post">
+                @csrf
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="namasupplier">Nama Supplier</label>
+                        <input id="namasupplier" class="form-control" type="text" placeholder="masukan nama" name="namasupplier">
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="alamat">Alamat</label>
+                        <textarea name="alamat" id="" class="form-control" placeholder="masukan alamat" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Tambah</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-6 mb-3">
             <button class="btn btn-primary " type="button" data-toggle="modal" data-target="#tambahbarang">Tambah Data Barang</button>
+            <button class="btn btn-secondary" type="button" data-toggle="modal" data-target="#tambahsupplier">
+                <i class="fa fa-users"></i> Tambah Supplier</button>
         </div>
         <div class="col-md-6 mb-3">
             <form action="{{ url()->current() }}">
@@ -199,6 +243,18 @@
                                         <div class="form-group">
                                             <label for="tanggalmasuk">Tanggal Masuk</label>
                                             <input id="tanggalmasuk" class="form-control" value="{{ date('Y-m-d') }}" type="date" name="tanggalmasuk">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="idsupplier">Supplier</label>
+                                            <select id="idsupplier" class="form-control" name="idsupplier">
+                                                @foreach ($supplier as $s)
+                                                <option value="{{ $s->idsupplier }}" @if ($s->idsupplier == $item->idsupplier)
+                                                    selected
+                                                @endif>{{ $s->namasupplier }}</option>
+                                                    
+                                                @endforeach
+                                            </select>
                                         </div>
 
                                     </div>

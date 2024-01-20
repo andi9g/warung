@@ -28,6 +28,7 @@ class Warung extends Migration
             $table->integer("iddatabarang");
             $table->date("tanggalmasuk");
             $table->integer("jumlah");
+            $table->integer("idsupplier");
             $table->timestamps();
         });
 
@@ -37,6 +38,13 @@ class Warung extends Migration
             $table->date("tanggalkeluar");
             $table->integer("jumlah");
             $table->double("harga");
+            $table->timestamps();
+        });
+
+        Schema::create('supplier', function (Blueprint $table) {
+            $table->bigIncrements('idsupplier');
+            $table->String("namasupplier");
+            $table->String("alamat");
             $table->timestamps();
         });
     }
