@@ -100,11 +100,9 @@
                         ->groupBy("s.namasupplier")
                         ->get();
                     @endphp
-                    <ol style="margin: 0;">
                         @foreach ($supplier as $sup)
-                            <li>{{ $sup->namasupplier }}</li>
+                            {{ $sup->namasupplier }} <br>
                         @endforeach
-                    </ol>
                 </td>
             </tr>
         @endforeach
