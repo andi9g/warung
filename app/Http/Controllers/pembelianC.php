@@ -61,7 +61,7 @@ class pembelianC extends Controller
                 $hitung =  $sekarang - $jumlah; 
 
             }
-            if($hitung < 0) {
+            if($hitung < 0 && $jumlah <= 0) {
                 return redirect()->back()->with('error', 'Terjadi kesalahan');
             }
 
