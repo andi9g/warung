@@ -20,6 +20,7 @@ class Warung extends Migration
             $table->string("namabarang");
             $table->string("satuan")->nullable();
             $table->double("harga");
+            $table->double("hargajual");
             $table->timestamps();
         });
         

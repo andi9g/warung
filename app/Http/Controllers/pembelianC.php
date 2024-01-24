@@ -24,9 +24,9 @@ class pembelianC extends Controller
 
         $data = databarangM::from('databarang as b')
         ->join('pembelian as p', 'p.iddatabarang', 'b.iddatabarang')
-        ->select("b.iddatabarang", "b.namabarang", "b.harga")
+        ->select("b.iddatabarang", "b.namabarang", "b.harga", "b.hargajual")
         ->selectRaw('((sum(p.jumlah)) ) as totaljumlah')
-        ->groupBy('b.iddatabarang','b.namabarang', 'b.harga')
+        ->groupBy('b.iddatabarang','b.namabarang', 'b.harga', 'b.hargajual')
         ->where("namabarang", "like", "%$keyword%")
         ->paginate(15);
 

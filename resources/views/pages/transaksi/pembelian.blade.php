@@ -30,12 +30,17 @@
     
                     <div class="form-group">
                         <label for="jumlah">Jumlah</label>
-                        <input id="jumlah" value="1" class="form-control" value="{{ date('Y-m-d') }}" type="number" name="jumlah">
+                        <input id="jumlah" value="1" class="form-control"  type="number" name="jumlah">
                     </div>
     
                     <div class="form-group">
                         <label for="harga">Harga</label>
-                        <input id="harga" value="1" class="form-control" value="{{ date('Y-m-d') }}" type="number" name="harga">
+                        <input id="harga" value="1" class="form-control"  type="number" name="harga">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="hargajual">Harga Jual</label>
+                        <input id="hargajual" value="1" class="form-control" type="number" name="hargajual">
                     </div>
                     
                     <div class="form-group">
@@ -117,7 +122,8 @@
                         <th width="5px">No</th>
                         <th>Nama Barang</th>
                         <th>Jumlah</th>
-                        <th>Harga</th>
+                        <th>H. Beli</th>
+                        <th>H. Jual</th>
                         <th>Aksi</th>
                         <th>Penjualan</th>
                     </tr>
@@ -133,6 +139,7 @@
                         <td>{{ $item->namabarang }}</td>
                         <td>{{ $item->totaljumlah - $total }}</td>
                         <td>Rp{{ number_format($item->harga, 0, ",", ".") }}</td>
+                        <td>Rp{{ number_format($item->hargajual, 0, ",", ".") }}</td>
                         <td>
                             <button class="badge badge-btn border-0 badge-info" type="button" data-toggle="modal" data-target="#ubahstok{{ $item->iddatabarang }}">
                                 <i class="fa fa-edit"></i> Stok
@@ -172,6 +179,11 @@
                                             <label for="harga">Harga Barang</label>
                                             <input id="harga" class="form-control" type="number" value="{{ $item->harga }}" name="harga">
                                         </div>
+
+                                        <div class="form-group">
+                                            <label for="hargajual">Harga Jual</label>
+                                            <input id="hargajual" class="form-control" value="{{ $item->hargajual }}" type="number" name="hargajual">
+                                        </div>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" class="btn btn-success">Ubah</button>
@@ -194,7 +206,7 @@
                                     @csrf
                                     <div class="modal-body">
                                         <input type="number" name="iddatabarang" hidden value="{{ $item->iddatabarang }}" id="">
-                                        <input type="number" name="harga" hidden value="{{ $item->harga }}" id="">
+                                        <input type="number" name="harga" hidden value="{{ $item->hargajual }}" id="">
                                         <input type="number" name="jumlahsekarang" hidden value="{{ $item->totaljumlah - $total }}" id="">
 
                                         <div class="form-group">
