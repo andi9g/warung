@@ -84,7 +84,7 @@ class pembelianC extends Controller
             
             $hitung = $jumlah - $request->jumlah; 
             if($hitung < 0) {
-                return redirect()->back()->with('error', 'Terjadi kesalahan');
+                return redirect()->back()->with('error', 'Maaf stok tidak tersedia!');
             }
             
             $data = $request->all();
@@ -104,6 +104,13 @@ class pembelianC extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate([
+            "namabarang" => "required|unique:databarang,namabarang",
+        ], [
+            "unique" => "Maaf nama barang sudah ada, silahkan melakukan update data yang telah ada!",
+        ]);
+
         try{
             
             $data = $request->all();

@@ -96,12 +96,12 @@
                         ->join("databarang as b", "b.iddatabarang", "p.iddatabarang")
                         ->join("supplier as s", "s.idsupplier", "p.idsupplier")
                         ->where("b.namabarang", $item->namabarang)
-                        ->select("s.namasupplier")
-                        ->groupBy("s.namasupplier")
+                        ->select("s.namasupplier", "s.idsupplier")
+                        ->groupBy("s.namasupplier", "s.idsupplier")
                         ->get();
                     @endphp
                         @foreach ($supplier as $sup)
-                            {{ $sup->namasupplier }} <br>
+                            {{ $sup->namasupplier }} (ID{{ sprintf("%03s", $sup->idsupplier) }}) <br>
                         @endforeach
                 </td>
             </tr>
